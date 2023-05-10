@@ -74,58 +74,6 @@ variable "virtual_network_subnet_id" {
   
 }
 
-variable "auth_settings" {
-  description = "nested block: NestingList, min items: 0, max items: 1"
-  type = set(object(
-    {
-      active_directory = list(object(
-        {
-          allowed_audiences = list(string)
-          client_id         = string
-          client_secret     = string
-        }
-      ))
-      additional_login_params        = map(string)
-      allowed_external_redirect_urls = list(string)
-      default_provider               = string
-      enabled                        = bool
-      facebook = list(object(
-        {
-          app_id       = string
-          app_secret   = string
-          oauth_scopes = list(string)
-        }
-      ))
-      google = list(object(
-        {
-          client_id     = string
-          client_secret = string
-          oauth_scopes  = list(string)
-        }
-      ))
-      issuer = string
-      microsoft = list(object(
-        {
-          client_id     = string
-          client_secret = string
-          oauth_scopes  = list(string)
-        }
-      ))
-      runtime_version               = string
-      token_refresh_extension_hours = number
-      token_store_enabled           = bool
-      twitter = list(object(
-        {
-          consumer_key    = string
-          consumer_secret = string
-        }
-      ))
-      unauthenticated_client_action = string
-    }
-  ))
-  default = []
-}
-
 variable "connection_string" {
   description = "nested block: NestingSet, min items: 0, max items: 0"
   type = set(object(
@@ -196,15 +144,21 @@ variable "site_config" {
   default = []
 }
 
-variable "timeouts" {
-  description = "nested block: NestingSingle, min items: 0, max items: 0"
-  type = set(object(
-    {
-      create = string
-      delete = string
-      read   = string
-      update = string
-    }
-  ))
-  default = []
+variable "create_private_endpoint"{
+  type = bool
+  default = false
+  description = "Wether to creat a private endpoint or not."
+}
+
+variable "pe_subnet_id" {
+  type = string
+  default = null
+  description = "Subnet ID for creating Private Endpoint in."
+}
+
+variable "zip_deploy_file" {
+  type = string
+  description = "(Optional) The local path and filename of the Zip packaged application to deploy to this Linux Function App."
+  default = null
+  
 }
