@@ -63,6 +63,7 @@ resource "azurerm_linux_function_app" "this" {
 }
 
 resource "azurerm_private_endpoint" "this" {
+  count = var.create_private_endpoint == ture ? 1:0
   name                          = "${var.name}-pe"
   location                      = var.location
   resource_group_name           = var.resource_group_name

@@ -65,12 +65,13 @@ variable "storage_account_name" {
 variable "tags" {
   description = "(optional)"
   type        = map(string)
-  default     = null
+  default     = {}
 }
 
 variable "virtual_network_subnet_id" {
     type = string
     default = "null"
+    description = "Optional"
   
 }
 
