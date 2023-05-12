@@ -101,46 +101,12 @@ variable "identity" {
 variable "site_config" {
   description = "nested block: NestingList, min items: 0, max items: 1"
   type = set(object(
-    {
-      always_on           = bool
-      cors = list(object(
-        {
-          allowed_origins     = set(string)
-          support_credentials = bool
-        }
-      ))
-      ftps_state        = string
-      health_check_path = string
-      http2_enabled     = bool
-      ip_restriction = list(object(
-        {
-          action                    = string
-          ip_address                = string
-          name                      = string
-          priority                  = number
-          service_tag               = string
-          subnet_id                 = string
-          virtual_network_subnet_id = string
-        }
-      ))
-      min_tls_version           = string
-      pre_warmed_instance_count = number
-      scm_ip_restriction = list(object(
-        {
-          action                    = string
-          ip_address                = string
-          name                      = string
-          priority                  = number
-          service_tag               = string
-          subnet_id                 = string
-          virtual_network_subnet_id = string
-        }
-      ))
-      scm_type                    = string
-      scm_use_main_ip_restriction = bool
-      use_32_bit_worker_process   = bool
-      websockets_enabled          = bool
-    }
+  {
+    always_on = optional(bool, false)
+    application_insights_connection_string = optional(string, null)
+    application_insights_key = optional(string, null)
+    #application_stack = 
+  }
   ))
   default = []
 }
