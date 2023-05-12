@@ -11,15 +11,15 @@ module "fucntion-app" {
 }
 
 module "asp" {
-  source = "../modules/app_service_plan"
+  source = "../../modules/app_service_plan"
   name = "new-func-asp"
   location = "West Europe"
   resource_group_name = "rsg"
   kind = "Linux"
   reserved = false
   sku {
-    tier = ""
-    size = ""
+    tier = "Standard"
+    size = "S1"
   }
   tags = {}
 
